@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Transfer</title>
+</head>
+<body>
+<h1>Transfer</h1>
+<p>
+    <a href="/customer">Customer list</a>
+</p>
+<form th:action="@{/customer/transfer}" method="post">
+    <table>
+        <tr>
+            <td>Depositor ID:</td>
+            <td><input type="text" name="depositorId" th:value="${customer.getId()}" readonly/></td>
+        </tr>
+        <tr>
+            <td>Full name:</td>
+            <td><input type="text" th:value="${customer.getFullName()}" readonly/></td>
+        </tr>
+        <tr>
+            <td>Phone Number:</td>
+            <td><input type="text" th:value="${customer.getPhoneNumber()}" readonly/></td>
+        </tr>
+        <tr>
+            <td>Address:</td>
+            <td><input type="text" th:value="${customer.getAddress()}" readonly/></td>
+        </tr>
+        <tr>
+            <td>Balance</td>
+            <td><input type="text" th:value="${customer.getBalance()}" readonly/></td>
+        </tr>
+        <tr>
+            <td>Amount Transfer (+10% VAT)</td>
+            <td><input type="number" name="amount" required/></td>
+        </tr>
+        <tr>
+            <td>Receiver ID</td>
+            <td><select name="receiverId">
+                <th:block th:each="customerInList : ${receiverList}">
+                    <option th:text="${customerInList.getId()}"></option>
+                </th:block>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Deposit"></td>
+        </tr>
+    </table>
+</form>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+</body>
+</html>

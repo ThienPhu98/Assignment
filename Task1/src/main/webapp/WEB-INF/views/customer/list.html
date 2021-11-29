@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/customer/create">Create new customer</a>
+<h1>Customers</h1>
+<table border="1">
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>Balance</th>
+        <th colspan="4">Action</th>
+    </tr>
+    <th:block th:each="customer : ${customerList}">
+        <tr>
+            <td th:text="${customer.getId()}"></td>
+            <td th:text="${customer.getFullName()}"></td>
+            <td th:text="${customer.getPhoneNumber()}"></td>
+            <td th:text="${customer.getAddress()}"></td>
+            <td th:text="${customer.getBalance()}"></td>
+            <td><a th:href="@{/customer/{id}/deposit(id=${customer.getId()})}">deposit</a></td>
+            <td><a th:href="@{/customer/{id}/withdraw(id=${customer.getId()})}">withdraw</a></td>
+            <td><a th:href="@{/customer/{id}/transfer(id=${customer.getId()})}">transfer</a></td>
+            <td><a th:href="@{/customer/{id}/delete(id=${customer.getId()})}">delete</a></td>
+        </tr>
+    </th:block>
+    <th:block th:if="${message}">
+        <p th:text="${message}"></p>
+    </th:block>
+</table>
+</body>
+</html>
