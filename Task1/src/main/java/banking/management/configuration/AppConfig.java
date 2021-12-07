@@ -2,12 +2,12 @@ package banking.management.configuration;
 
 import banking.management.repository.CustomerRepository;
 import banking.management.repository.ICustomerRepository;
-import banking.management.repository.ITransactionRepository;
-import banking.management.repository.TransactionRepository;
+import banking.management.repository.ITransferRepository;
+import banking.management.repository.TransferRepository;
 import banking.management.service.CustomerService;
 import banking.management.service.ICustomerService;
-import banking.management.service.ITransactionService;
-import banking.management.service.TransactionService;
+import banking.management.service.ITransferService;
+import banking.management.service.TransferService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -45,16 +45,6 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
-    }
-
-    @Bean
-    public ICustomerService customerService() {
-        return new CustomerService();
-    }
-
-    @Bean
-    public ITransactionService transactionService() {
-        return new TransactionService();
     }
 
     @Bean
@@ -126,12 +116,23 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     }
 
     @Bean
+    public ICustomerService customerService() {
+        return new CustomerService();
+    }
+
+    @Bean
+    public ITransferService transactionService() {
+        return new TransferService();
+    }
+
+    @Bean
     public ICustomerRepository customerRepository() {
         return new CustomerRepository();
     }
 
     @Bean
-    public ITransactionRepository transactionRepository() {
-        return new TransactionRepository();
+    public ITransferRepository transactionRepository() {
+        return new TransferRepository();
     }
+
 }

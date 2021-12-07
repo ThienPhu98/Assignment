@@ -1,9 +1,9 @@
 package banking.management.controller;
 
 import banking.management.model.Customer;
-import banking.management.model.Transaction;
+import banking.management.model.Transfer;
 import banking.management.service.ICustomerService;
-import banking.management.service.ITransactionService;
+import banking.management.service.ITransferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +19,7 @@ public class ProcessingController {
     private ICustomerService customerService;
 
     @Autowired
-    private ITransactionService transactionService;
+    private ITransferService transferService;
 
     @GetMapping("")
     public ModelAndView showList() {
@@ -137,8 +137,8 @@ public class ProcessingController {
             customerService.save(receiver);
 
             double interested = (amount * 0.1);
-            Transaction transaction = new Transaction(amount, depositorId, receiverId, interested);
-            transactionService.save(transaction);
+            Transfer transfer = new Transfer(amount, depositorId, receiverId, interested);
+            transferService.save(transfer);
 
             List<Customer> customerArrayList = customerService.findAll();
             modelAndView.addObject("customerList", customerArrayList);

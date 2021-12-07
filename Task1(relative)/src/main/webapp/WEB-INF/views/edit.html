@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description">
+    <meta content="Coderthemes" name="author">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/bootstrap-5.1.3-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/fontawesome-free-6.0.0-beta2-web/css/all.min.css">
+    <title>Edit Customer Information</title>
+    <style>
+        .table-title {
+            background-color: darkviolet;
+            align-content: center;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="table-title">
+        <div class="row">
+            <div class="col-sm-6 float-start">
+                <h1>Edit Customer Information</h1>
+            </div>
+            <div class="col-sm-6 float-end" style="padding-top: 7px">
+                <a href="/customers" class="btn btn-outline-light"><i class="fas fa-list-alt"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body">
+        <form class="row g-3" th:object="${customerEdit}" method="post">
+            <div class="col-md-6">
+                <label for="validationDefault01" class="form-label">Full name</label>
+                <input type="text" class="form-control" th:field="*{full_name}" id="validationDefault01" th:value="${customerEdit.getFull_name()}" name = "full_name" required>
+            </div>
+            <div class="col-md-6">
+                <label for="validationDefault02" class="form-label">Email</label>
+                <input type="email" class="form-control" th:field="*{email}" id="validationDefault02" th:value="${customerEdit.getEmail()}" name = "email" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="validationDefault03" class="form-label">Address</label>
+                <input type="text" class="form-control" th:field="*{address}" id="validationDefault03" th:value="${customerEdit.getAddress()}" name = "address" required>
+            </div>
+            <div class="col-md-6">
+                <label for="validationDefault04" class="form-label">Phone</label>
+                <input type="number" class="form-control" th:field="*{phone}" id="validationDefault04" th:value="${customerEdit.getPhone()}" name = "phone" required>
+            </div>
+
+            <div class="col-md-12">
+                <button class="btn btn-primary" type="submit">Update customer information</button>
+            </div>
+        </form>
+        <div class="col-md-12" th:if="${message}">
+            <div class="alert alert-danger" role="alert">
+                <span th:text="${message}"></span>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
+<script src="/assets/fontawesome-free-6.0.0-beta2-web/js/all.min.js"></script>
+</body>
+</html>
